@@ -1,0 +1,26 @@
+<launch>
+  <!-- Argument to specify the UR5 URDF file -->
+  <arg name="urdf_file" default="$(find ur_description)/urdf/ur5.xacro" />
+  
+  <!-- Load the URDF file into the parameter server -->
+  <param name="robot_description" command="$(find xacro)/xacro $(arg urdf_file)" />
+
+  
+  
+  <!-- Static transform publisher for camera to base_link -->
+
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher" 
+      args="0.0 0.0 0.0 -1.57 0.0 0.0 base_link base_link_simulation 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher2" 
+        args="-0.256044 0.433903 1.0709928 -3.11832 3.13685 0.0328435 base_link_simulation camera_color_optical_frame 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher3" 
+        args="-0.256044 0.433903 1.0709928 -3.11832 3.13685 0.0328435 base_link camera_color_optical_frame_simulation 100" />
+
+        
+
+  <node pkg="tf" type="static_transform_publisher" name="static_transform_publisher4" 
+        args="0 0.1 0.1 0 0 0.785398 tool0 dummy 100" />
+
+</launch>
